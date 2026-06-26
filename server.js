@@ -23,6 +23,7 @@ const path = require('path') //Ele serve para trabalhar com caminhos de arquivos
 //config da conexao do banco de dados
 const dbConfig = {
     host: process.env.DB_HOST || 'localhost',
+    port: process.env.DB_PORT || 3306,
     user: process.env.DB_USER || 'root',
     password: process.env.DB_PASSWORD || '123456',
     database: process.env.DB_NAME || 'task_dashboard'
@@ -37,7 +38,7 @@ app.post('/tasks', async (req, res) => {
 
         const [result] = await connection.execute(
             'INSERT INTO tasks (description) VALUES (?)',
-            [description]
+            [description] 
         );
 
         await connection.end();
@@ -123,7 +124,17 @@ app.delete('/tasks/:id', async (req, res) => {
 })
 
 
+console.log({
 
+  host: process.env.DB_HOST,
+
+  port: process.env.DB_PORT,
+
+  user: process.env.DB_USER,
+
+  database: process.env.DB_NAME
+
+});
 //configuração do servidor (porta)
 app.listen(PORT, () => {
     console.log(`servidor rodando na porta ${PORT}`)
