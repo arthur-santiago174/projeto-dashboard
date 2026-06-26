@@ -29,23 +29,19 @@ const dbConfig = {
     database: process.env.DB_NAME || 'task_dashboard'
 };
 
-const pool = mysql.createPool({
-    ...dbConfig,
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
-});
 
 // Criar tarefa
 app.post('/tasks', async (req, res) => {
     try {
-        const connection = pool;
+        const connection = await mysql.createConnection(dbConfig);
         const { description } = req.body;
 
         const [result] = await connection.execute(
             'INSERT INTO tasks (description) VALUES (?)',
             [description] 
         );
+
+        await connection.end();
 
         res.status(201).json({
             id: result.insertId,
@@ -65,10 +61,11 @@ app.post('/tasks', async (req, res) => {
 // Listar tarefas
 app.get('/tasks', async (req, res) => {
     try {
-        const connection = pool;
+        const connection = await mysql.createConnection(dbConfig);
         const [rows] = await connection.execute(
             'SELECT * FROM tasks ORDER BY id DESC'
         );
+        await connection.end();
         res.json(rows)
     } catch (error) {
         console.error('Erro ao listar tarefas:', error);
@@ -80,7 +77,7 @@ app.get('/tasks', async (req, res) => {
 //configurando o put
 app.put('/tasks/:id', async (req, res) => {
     try {
-        const connection = pool;
+        const connection = await mysql.createConnection(dbConfig);
         const { id } = req.params;
         const { description, completed } = req.body;
 
@@ -90,6 +87,7 @@ app.put('/tasks/:id', async (req, res) => {
         );
 
         if (currentTask.length === 0) {
+            await connection.end();
             return res.status(404).json({ error: 'tarefa não encontrada' });
         }
 
@@ -99,6 +97,7 @@ app.put('/tasks/:id', async (req, res) => {
         await connection.execute(
             'UPDATE tasks SET description = ?, completed = ? WHERE id = ?',
             [newDescription, newCompleted, id]);
+        await connection.end();
         res.json({ id, description: newDescription, completed: newCompleted });
     } catch (error) {
         console.error('Erro ao editar tarefa:', error);
@@ -110,18 +109,20 @@ app.put('/tasks/:id', async (req, res) => {
 //configurando o delete
 app.delete('/tasks/:id', async (req, res) => {
     try {
-        const connection = pool;
+        const connection = await mysql.createConnection(dbConfig);
         const { id } = req.params;
         await connection.execute(
             'DELETE FROM tasks WHERE id = ?',
             [id]
         );
+        await connection.end();
         res.json({ message: 'tarefa excluída com sucesso' });
     } catch (error) {
         console.error('Erro ao excluir tarefa:', error);
         res.status(500).json({ error: 'erro interno do servidor' });
     }
 })
+
 
 
 //configuração do servidor (porta)

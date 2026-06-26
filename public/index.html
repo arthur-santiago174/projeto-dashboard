@@ -1,102 +1,69 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tarefas dos próximos dias</title>
+    <title>Tarefas dos proximos dias</title>
     <link rel="stylesheet" href="./styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </head>
 <body>
-
-<div class="dashboard">
-
+    <div class="dashboard">
+<!-- h1 -->
     <h1>Olá, Arthur!</h1>
-    <p class="subtitle">Aqui está o resumo das suas tarefas</p>
-
-    <div class="cards-container">
-        <div class="task-card">
-            <i class="bi bi-calendar"></i>
-            <h3>Tarefas de hoje</h3>
-            <p id="todayCount">0</p>
-            <span>Foco no que importa</span>
-        </div>
-
-        <div class="task-card">
-            <i class="bi bi-clock"></i>
-            <h3>Tarefas futura</h3>
-            <p id="futureCount">0</p>
-            <span>Planeje o amanhã</span>
-        </div>
-
-        <div class="task-card">
-            <i class="bi bi-bullseye"></i>
-            <h3>Metas futuras</h3>
-            <p id="goalCount">0</p>
-            <span>Grandes objetivos</span>
-        </div>
-
-        <div class="task-card">
-            <i class="bi bi-mortarboard"></i>
-            <h3>Tarefas da escola</h3>
-            <p id="schoolCount">0</p>
-            <span>Mantenha seus estudos</span>
-        </div>
-
-        <div class="task-card">
-            <i class="bi bi-list-task"></i>
-            <h3>Tarefas secundárias</h3>
-            <p id="secondaryCount">0</p>
-            <span>Detalhes importantes</span>
-        </div>
+    <p class="subtitle">Aqui está as tarefas dos proximos dias</p>
+    
+    <!-- qauntidades de tarefas concluidas -->
+    <div class="task-card completed-card">
+        <p class="completed-number" id="completedCount">0</p> 
+        <h2 class="card-title">Concluidas</h2>
+        <p class="card-subtitle">esta semana</p>
     </div>
 
+    <!-- qauntidades de tarefas pendentes -->
+   <div class="task-card pending-card">
+        <p class="pending-number" id="pendingCount">0</p> 
+        <h2 class="card-title">Pendentes</h2>
+        <p class="card-subtitle">para hoje</p>
+    </div> 
+
+
+    
+<!-- adicionamento de tarefas -->
     <form class="add-new-task" id="taskForm">
-        <h2>Adicionar nova tarefa</h2>
-        <div class="input-area">
-            <input type="text" placeholder="O que você precisa fazer?" id="description" autocomplete="off">
-
-            <select id="category">
-                <option value="today">Tarefas de hoje</option>
-                <option value="future">Tarefas futura</option>
-                <option value="goal">Metas futuras</option>
-                <option value="school">Tarefas da escola</option>
-                <option value="secondary">Tarefas secundárias</option>
-            </select>
-
-            <button type="submit">Adicionar</button>
-        </div>
+        <h2 class="add">Adicionar nova tarefa</h2>
+        <input type="text" placeholder="o que você precisa fazer?" id="description" autocomplete="off">
+        <button type="submit">Adicionar</button>
     </form>
 
-    <div class="tasks-section">
-
-        <div class="tasks-tabs">
-            <button class="tab-button active" data-category="today">Tarefas de hoje</button>
-            <button class="tab-button" data-category="future">Tarefas futura</button>
-            <button class="tab-button" data-category="goal">Metas futuras</button>
-            <button class="tab-button" data-category="school">Tarefas da escola</button>
-            <button class="tab-button" data-category="secondary">Tarefas secundárias</button>
-        </div>
-
-        <div class="status-tabs">
-            <button class="active" id="pendingTab">Pendentes</button>
-            <button id="completedTab">Concluídas</button>
-        </div>
-
-        <div class="tasks-list">
-            <ul id="pendingTasks"></ul>
-            <ul id="completedTasks"></ul>
-        </div>
-
+<!-- abas de tarefas -->
+<div class="tasks-section">
+    <div class="tasks-tabs">
+        <button class="tab-button active" type="button" id="pendingTab">Pendentes</button>
+        <button class="tab-button" type="button" id="completedTab">Concluídas</button>
     </div>
 
-    <footer>
-        <img src="../img/rocket.png" class="icon" alt="foguete">
-        <h2>Mantenha o foco!</h2>
-    </footer>
+    <div class="tasks-list active" id="pendingPanel">
+        <ul id="pendingTasks"></ul>
+    </div>
 
+    <div class="tasks-list" id="completedPanel">
+        <ul id="completedTasks"></ul>
+    </div>
 </div>
 
+<!-- footer --> 
+ <footer>
+    <img src="../img/rocket.png" alt="Ícone de foguete" class="icon">
+        <h2>Mantenha o foco!</h2>
+        <p class="dev-note">npm start / nodemon index.js (projeto-dashboard) mysql => tasks_dashboard port => 3007</p>
+ </footer>
+
+<!-- fiim -->
+    </div>
+
+<!-- java script -->
 <script src="./index.js"></script>
+
 </body>
 </html>
