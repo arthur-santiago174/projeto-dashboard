@@ -70,7 +70,7 @@ taskForm.addEventListener('submit', async (e) => {
     })
 
     taskForm.reset();
-    loadTasks()
+    await loadTasks();
 })
 
 // editar tasks
@@ -95,7 +95,9 @@ async function editTask(id, currentDescription) {
     const cancelButton = modal.querySelector('.cancel-edit');
     const saveButton = modal.querySelector('.save-edit');
 
+    editInput.value = currentDescription;
     editInput.focus();
+    editInput.select();
 
     cancelButton.addEventListener('click', () => {
         modal.remove();
@@ -112,8 +114,11 @@ async function editTask(id, currentDescription) {
             body: JSON.stringify({ description: newDescription })
         });
 
+        saveButton.disabled = true;
+        saveButton.textContent = 'Salvando...';
+
         modal.remove();
-        loadTasks();
+        await loadTasks();
     });
 }
 
@@ -143,12 +148,15 @@ async function deleteTask(id) {
     });
 
     confirmButton.addEventListener('click', async () => {
+        confirmButton.disabled = true;
+        confirmButton.textContent = 'Excluindo...';
+
         await fetch(`${API_URL}/${id}`, {
             method: 'DELETE'
         });
 
         modal.remove();
-        loadTasks();
+        await loadTasks();
     });
 }
 
@@ -160,7 +168,7 @@ async function toggleTask(id, completed) {
         body: JSON.stringify({ completed: !completed })
     });
 
-    loadTasks();
+    await loadTasks();
 }
 
 pendingTab.addEventListener('click', () => {
