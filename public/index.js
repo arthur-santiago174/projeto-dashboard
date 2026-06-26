@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3007/tasks';
+const API_URL = '/tasks';
 
 const taskForm = document.getElementById('taskForm')
 const pendingTasks = document.getElementById('pendingTasks')

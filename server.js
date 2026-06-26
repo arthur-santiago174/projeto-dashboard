@@ -9,23 +9,23 @@
 // Devolve resposta para o script.js
 
 
-
+require('dotenv').config();
 const express = require('express')
 const mysql = require('mysql2/promise');
 
 const app = express()
-const PORT = 3007;
+const PORT = process.env.PORT || 3007;
 
 const path = require('path') //Ele serve para trabalhar com caminhos de arquivos e pastas.
-app.use(express.static(path.join(__dirname, 'public'))); //Serve para: fazer o Express entregar os arquivos da pasta public.
-app.use(express.json()); //Serve para: permitir que o backend leia JSON enviado pelo front.
+    app.use(express.static(path.join(__dirname, 'public'))); //Serve para: fazer o Express entregar os arquivos da pasta public.
+    app.use(express.json()); //Serve para: permitir que o backend leia JSON enviado pelo front.
 
 //config da conexao do banco de dados
 const dbConfig = {
-    host: 'localhost',
-    user: 'root',
-    password: '123456',
-    database: 'task_dashboard'
+    host: process.env.DB_HOST || 'localhost',
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD || '123456',
+    database: process.env.DB_NAME || 'task_dashboard'
 };
 
 
@@ -126,5 +126,5 @@ app.delete('/tasks/:id', async (req, res) => {
 
 //configuração do servidor (porta)
 app.listen(PORT, () => {
-    console.log(`servidor rodando em http://localhost:${PORT}`)
+    console.log(`servidor rodando na porta ${PORT}`)
 })
