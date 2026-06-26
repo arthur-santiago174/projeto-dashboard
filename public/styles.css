@@ -1,0 +1,369 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+* {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 25px;
+    background-color: #111111;
+    color: #1f1f1f;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.dashboard {
+    background-color: #eeeeee;
+    padding: 35px 70px 60px;
+    width: min(1100px, 100%);
+    border-radius: 28px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 20px;
+}
+
+.dashboard > h1,
+.dashboard > .subtitle,
+.dashboard > .add-new-task,
+.dashboard > footer,
+.dashboard > div:not(.task-card) {
+    grid-column: 1 / -1;
+}
+
+h1 {
+    margin-bottom: 4px;
+}
+
+.subtitle {
+    margin-top: 0;
+}
+
+.task-card {
+    background-color: #f8f8f8;
+    border-radius: 16px;
+    border: 1px solid #b5b5b5;
+    padding: 20px;
+    width: 100%;
+    min-height: 170px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.completed-number,
+.pending-number {
+    font-size: 48px;
+    font-weight: 700;
+    color: #111111;
+    margin: 0;
+}
+
+.card-title {
+    margin-bottom: 4px;
+    margin-top: 3px;
+}
+
+.card-subtitle {
+    margin-top: 0;
+}
+
+.add-new-task {
+    background-color: #f8f8f8;
+    border: 1px solid #b5b5b5;
+    width: 100%;
+    padding: 34px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.add-new-task h2 {
+    margin-top: 3px;
+    margin-bottom: 20px;
+}
+
+.add-new-task input {
+    width: calc(100% - 120px);
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #9a9a9a;
+    background-color: #ffffff;
+    color: #111111;
+    outline: none;
+    font-size: 18px;
+}
+
+.add-new-task input:focus {
+    border-color: #111111;
+}
+
+.add-new-task button {
+    width: 105px;
+    padding: 17px;
+    margin-left: 10px;
+    border-radius: 8px;
+    border: none;
+    background-color: #1f1f1f;
+    color: #ffffff;
+    cursor: pointer;
+    vertical-align: top;
+}
+
+.add-new-task button:hover {
+    background-color: #333333;
+}
+
+/* abas de tarefas */
+.tasks-section {
+    margin-top: 20px;
+    margin-bottom: 28px;
+}
+
+.tasks-tabs {
+    display: flex;
+    gap: 30px;
+    border-bottom: 1px solid #d0d0d0;
+}
+
+.tab-button {
+    position: relative;
+    border: none;
+    background: transparent;
+    padding: 0 0 16px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #6b6b6b;
+    cursor: pointer;
+}
+
+.tab-button.active {
+    color: #111111;
+}
+
+.tab-button.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 3px;
+    border-radius: 20px;
+    background-color: #111111;
+}
+
+.tasks-list {
+    display: none;
+    background-color: #ffffff;
+    border: 1px solid #d7d7d7;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.tasks-list.active {
+    display: block;
+}
+
+.tasks-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    color: #000000;
+    padding: 22px 28px;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 1.25em;
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+li > div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+.action {
+    min-width: 78px;
+    height: 38px;
+    border: none;
+    padding: 0 14px;
+    border-radius: 10px;
+    background-color: #eeeeee;
+    color: #333333;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s ease;
+}
+.toggle:hover {
+    background-color: #e6f4ea;
+    color: #1f7a3f;
+}
+
+.edit:hover {
+    background-color: #e8ecff;
+    color: #3949ab;
+}
+
+
+.action:hover {
+    background-color: #dcdcdc;
+    color: #111111;
+    transform: translateY(-1px);
+}
+
+.delete:hover {
+    background-color: #ffdede;
+    color: #8b1e1e;
+}
+
+footer {
+    display: flex;
+    gap: 40px;
+    width: 100%;
+    background-color: #dbddded6;
+    border: 1px solid black;
+    padding: 25px 45px;
+    border-radius: 13px;
+}
+
+.icon {
+    width: 60px;
+    height: 60px;
+}
+
+/* modal de edição */
+.edit-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.edit-modal {
+    width: min(420px, 90%);
+    background-color: #f8f8f8;
+    border: 1px solid #b5b5b5;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+}
+
+.edit-modal h2 {
+    margin-top: 0;
+    margin-bottom: 18px;
+    color: #111111;
+}
+
+.edit-modal input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #9a9a9a;
+    outline: none;
+    font-size: 16px;
+    background-color: #ffffff;
+    color: #111111;
+}
+
+.edit-modal input:focus {
+    border-color: #111111;
+}
+
+.edit-modal-actions,
+.delete-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.edit-modal-actions button,
+.delete-modal-actions button {
+    padding: 12px 18px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.cancel-edit,
+.cancel-delete {
+    background-color: #d8d8d8;
+    color: #111111;
+}
+
+.save-edit,
+.confirm-delete {
+    background-color: #111111;
+    color: #ffffff;
+}
+
+/* modal de exclusão */
+.delete-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.delete-modal {
+    width: min(420px, 90%);
+    background-color: #f8f8f8;
+    border: 1px solid #b5b5b5;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+}
+
+.delete-modal h2 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    color: #111111;
+}
+
+.delete-modal p {
+    margin-top: 0;
+    margin-bottom: 22px;
+    color: #333333;
+    font-size: 16px;
+}
+
+.cancel-delete:hover,
+.confirm-delete:hover,
+.cancel-edit:hover,
+.save-edit:hover {
+    opacity: 0.85;
+}
+
+
+.dev-note {
+    margin-left: auto;
+    align-self: flex-end;
+    font-size: 11px;
+    color: rgba(0, 0, 0, 0.28);
+}

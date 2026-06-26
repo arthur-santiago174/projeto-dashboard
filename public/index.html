@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarefas dos proximos dias</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+</head>
+<body>
+    <div class="dashboard">
+<!-- h1 -->
+    <h1>Olá, Arthur!</h1>
+    <p class="subtitle">Aqui está as tarefas dos proximos dias</p>
+    
+    <!-- qauntidades de tarefas concluidas -->
+    <div class="task-card completed-card">
+        <p class="completed-number" id="completedCount">0</p> 
+        <h2 class="card-title">Concluidas</h2>
+        <p class="card-subtitle">esta semana</p>
+    </div>
+
+    <!-- qauntidades de tarefas pendentes -->
+   <div class="task-card pending-card">
+        <p class="pending-number" id="pendingCount">0</p> 
+        <h2 class="card-title">Pendentes</h2>
+        <p class="card-subtitle">para hoje</p>
+    </div> 
+
+
+    
+<!-- adicionamento de tarefas -->
+    <form class="add-new-task" id="taskForm">
+        <h2 class="add">Adicionar nova tarefa</h2>
+        <input type="text" placeholder="o que você precisa fazer?" id="description" autocomplete="off">
+        <button type="submit">Adicionar</button>
+    </form>
+
+<!-- abas de tarefas -->
+<div class="tasks-section">
+    <div class="tasks-tabs">
+        <button class="tab-button active" type="button" id="pendingTab">Pendentes</button>
+        <button class="tab-button" type="button" id="completedTab">Concluídas</button>
+    </div>
+
+    <div class="tasks-list active" id="pendingPanel">
+        <ul id="pendingTasks"></ul>
+    </div>
+
+    <div class="tasks-list" id="completedPanel">
+        <ul id="completedTasks"></ul>
+    </div>
+</div>
+
+<!-- footer --> 
+ <footer>
+    <img src="../img/rocket.png" alt="Ícone de foguete" class="icon">
+        <h2>Mantenha o foco!</h2>
+        <p class="dev-note">npm start / nodemon index.js (projeto-dashboard) mysql => tasks_dashboard port => 3007</p>
+ </footer>
+
+<!-- fiim -->
+    </div>
+
+<!-- java script -->
+<script src="./index.js"></script>
+
+</body>
+</html>
